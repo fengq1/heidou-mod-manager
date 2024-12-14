@@ -14,7 +14,9 @@
       {
         "title": "heidou-mod-manager",
         "width": 1200,
-        "height": 600
+        "height": 600,
+        "fullscreen": false,
+        "decorations": false
       }
     ],
     "security": {
