@@ -1,11 +1,15 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar :elevation="0" @dragstart="startDragging" draggable="true">
+    <v-app-bar :elevation="1"
+               @dragstart="startDragging"
+               height="60"
+               draggable="true"
+               rounded>
       <v-avatar size="x-large" :image="logo">
       </v-avatar>
 
       <v-app-bar-title>Heidou</v-app-bar-title>
-      <v-btn icon="mdi-menu" size="large"></v-btn>
+      <Menu/>
       <v-btn icon="mdi-minus" size="large" @click="minimize"></v-btn>
       <!--      <v-btn icon="mdi-fullscreen" size="large" @click=" toggleMaximize"></v-btn>-->
       <v-btn icon="mdi-close" size="large" @click="close" color="#E53935"></v-btn>
@@ -50,9 +54,6 @@
       <v-container
         fluid
       >
-        <v-row  >
-          <v-divider/>
-        </v-row>
         <v-row>
           <router-view/>
         </v-row>
@@ -61,21 +62,23 @@
   </v-layout>
 </template>
 <script>
+import logo from './assets/logo.png'
 import {Window} from '@tauri-apps/api/window';
 
 const appWindow = new Window('main');
 
-import logo from './assets/logo.png'
-
 export default {
   data() {
     return {
+      logo,
       drawer: true,
       rail: false,
-      logo: logo
+
     }
   },
-  mounted() {
+  created() {
+    let json = this.$appConfigs.json();
+    console.log(json)
   },
   methods: {
     close() {

@@ -1,8 +1,10 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
+  "identifier": "main-capability",
   "description": "Capability for the main window",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "core:default",
     "core:window:default",
@@ -12,6 +14,9 @@
     "core:window:allow-toggle-maximize",
     "core:window:allow-destroy",
     "core:window:allow-hide",
-    "core:window:allow-show"
+    "core:window:allow-show",
+    "fs:allow-read-text-file",
+    "fs:allow-resource-read-recursive",
+    "fs:default"
   ]
 }
