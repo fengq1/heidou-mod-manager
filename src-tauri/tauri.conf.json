@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "heidou-mod-manager",
+        "title": "heidou",
         "width": 1200,
         "height": 600,
         "fullscreen": false,
