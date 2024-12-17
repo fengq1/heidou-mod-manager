@@ -1,0 +1,25 @@
+{
+  "avatar": "https://staticdelivery.nexusmods.com/images/games/4_3/tile_1303.jpg",
+  "menus": [
+    {
+      "key": "mod_manager",
+      "value": "mod_manager"
+    },
+    {
+      "key": "game_save",
+      "value": "game_save"
+    },
+    {
+      "key": "online_helper",
+      "value": "online_helper"
+    },
+    {
+      "key": "nav",
+      "value": "nav"
+    }
+  ],
+  "smapi": {
+    "version": "",
+    "path": ""
+  }
+}

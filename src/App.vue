@@ -1,6 +1,6 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar :elevation="1"
+    <v-app-bar :elevation="2"
                @dragstart="startDragging"
                height="60"
                draggable="true"
@@ -9,7 +9,7 @@
       </v-avatar>
 
       <v-app-bar-title>Heidou</v-app-bar-title>
-      <Menu/>
+      <More/>
       <v-btn icon="mdi-minus" size="large" @click="minimize"></v-btn>
       <!--      <v-btn icon="mdi-fullscreen" size="large" @click=" toggleMaximize"></v-btn>-->
       <v-btn icon="mdi-close" size="large" @click="close" color="#E53935"></v-btn>
@@ -40,45 +40,61 @@
             </v-list-item>
             <v-divider/>
             <v-list density="compact" nav>
-              <v-list-item prepend-icon="mdi-view-module" title="Mod管理" value="mod" to="mod"></v-list-item>
-              <v-list-item prepend-icon="mdi-content-save-all-outline" title="游戏存档" value="save"
-                           to="save"></v-list-item>
-              <v-list-item prepend-icon="mdi-account-group-outline" title="联机助手"></v-list-item>
-              <v-list-item prepend-icon="mdi-toolbox-outline" title="网站导航/工具" value="nav"
-                           to="nav"></v-list-item>
+              <v-list-item
+                prepend-icon="mdi-view-module"
+                title="Mod管理"
+                value="mod"
+                to="mod">
+              </v-list-item>
+              <v-list-item
+                prepend-icon="mdi-content-save-all-outline"
+                title="游戏存档"
+                value="save"
+                to="save">
+              </v-list-item>
+              <v-list-item
+                prepend-icon="mdi-account-group-outline"
+                title="联机助手"
+                value="online_helper"
+                to="online_helper"
+              ></v-list-item>
+              <v-list-item
+                prepend-icon="mdi-toolbox-outline"
+                title="网站导航/工具"
+                value="nav"
+                to="nav">
+              </v-list-item>
             </v-list>
           </v-navigation-drawer>
           <v-main style="height: 250px"></v-main>
         </v-layout>
       </v-card>
-      <v-container
-        fluid
-      >
-        <v-row>
-          <router-view/>
-        </v-row>
-      </v-container>
+      <!--      <v-container-->
+      <!--        fluid-->
+      <!--      >-->
+      <!--        <v-row>-->
+      <router-view/>
+      <!--        </v-row>-->
+      <!--      </v-container>-->
     </v-main>
   </v-layout>
 </template>
 <script>
 import logo from './assets/logo.png'
 import {Window} from '@tauri-apps/api/window';
+import More from "@/pages/more.vue";
 
 const appWindow = new Window('main');
 
 export default {
+  components: {More},
   data() {
     return {
       logo,
       drawer: true,
       rail: false,
-
+      menus: []
     }
-  },
-  created() {
-    let json = this.$appConfigs.json();
-    console.log(json)
   },
   methods: {
     close() {

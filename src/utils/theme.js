@@ -1,43 +1,42 @@
-import {reactive, ref, onMounted} from 'vue';
-import {useTheme} from 'vuetify';
+import {reactive} from 'vue';
+import conf from "@/utils/conf.js";
 
-export default {
-  setup() {
-    const theme = useTheme(); // 获取 Vuetify 主题对象
-    const osTheme = reactive({
-      dark: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
-    });
+export const systemTheme = 'system'
 
-    // 系统主题变化时更新主题
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      osTheme.dark = e.matches;
-      console.log("当前系统主题: " + (osTheme.dark ? 'dark' : 'light'));
-      setTheme(osTheme.dark ? 'dark' : 'light');
-    });
+let theme
 
-    // 设置主题
-    const setTheme = (themeValue) => {
-      console.log('设置主题: ' + themeValue);
-      theme.global.name.value = themeValue; // 修改 Vuetify 主题
-    };
+export function useSetVuetifyTheme(vuetifyTheme) {
+  theme = vuetifyTheme;
+}
 
-    // 获取当前主题
-    const getTheme = () => {
-      console.log('当前系统主题: ' + (osTheme.dark ? 'dark' : 'light'));
-      return osTheme.dark ? 'dark' : 'light';
-    };
+const osTheme = reactive({
+  dark: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+});
+// 系统主题变化时更新主题
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  osTheme.dark = e.matches;
+  toggleTheme()
+});
 
-    // 在组件挂载时设置初始主题
-    onMounted(() => {
-      setTheme(osTheme.dark ? 'dark' : 'light');
-    });
-    // 返回需要暴露的属性和方法
-    return {
-      theme,
-      setTheme,
-      getTheme,
-      osTheme,
-    };
-  },
+function getOsTheme() {
+  return (osTheme.dark ? 'dark' : 'light')
+}
 
-};
+export async function getTheme() {
+  const appConfigs = await conf.getAppConf();
+  console.log('appConfigs', appConfigs)
+  const appConfigTheme = appConfigs.theme
+  console.log('appConfigTheme', appConfigTheme)
+  return (appConfigTheme === systemTheme)
+    ? getOsTheme()
+    : appConfigTheme;
+}
+
+export async function toggleTheme(themeValue) {
+  const appConfigs = await conf.getAppConf();
+  const appConfigTheme = appConfigs.theme
+  theme.global.name.value = (appConfigTheme === systemTheme)
+    ? getOsTheme()
+    : themeValue;
+}
+
