@@ -1,45 +1,69 @@
 <template>
-  <v-card>
-    <v-layout>
-      <v-navigation-drawer
-        v-model="drawer"
-        temporary
-      >
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-          title="John Leider"
-        ></v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
-          <v-list-item prepend-icon="mdi-forum" title="About" value="about"></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <v-main style="height: 250px">
-        <div class="d-flex justify-center align-center h-100">
-          <v-btn
-            color="primary"
-            @click.stop="drawer = !drawer"
+  <v-container fluid>
+    <v-row dense class="fill-height">
+      <v-col cols="12">
+        <v-card class="fill-height">
+          <v-tabs
+              v-model="tab"
+              align-tabs="start"
           >
-            Toggle
-          </v-btn>
-        </div>
-      </v-main>
-    </v-layout>
-  </v-card>
-
+            <v-tab value="app">应用设置</v-tab>
+            <v-tab value="stardewValley">星露谷物语设置</v-tab>
+          </v-tabs>
+          <v-tabs-window v-model="tab">
+            <v-tabs-window-item
+                value="app"
+            >
+              <v-container fluid>
+                <v-row dense>
+                  <v-col cols="12">
+                    <v-select max-width="300"
+                              :items="['zh_CN','en']"
+                              variant="solo"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-radio-group inline label="系统主题" v-model="appConf.theme"
+                                   @change="changeTheme">
+                      <v-radio label="明亮" value="light"></v-radio>
+                      <v-radio label="暗黑" value="dark"></v-radio>
+                      <v-radio label="跟随系统" value="system"></v-radio>
+                    </v-radio-group>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-tabs-window-item>
+            <v-tabs-window-item
+                value="stardewValley"
+            >stardewValley
+            </v-tabs-window-item>
+          </v-tabs-window>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
+import {toggleTheme} from "@/utils/theme.js";
 
 export default {
   data: () => ({
-    appConf: {},
+    tab: null,
+    appConf: {}
   }),
   async created() {
     this.appConf = await this.$conf.getAppConf();
     console.log(this.appConf.language)
+  },
+  methods: {
+    changeTheme() {
+      toggleTheme(this.appConf.theme)
+      this.$conf.saveAppConf(this.appConf);
+      this.$snackbar.actions.openSnackbar(2000,{msg:"主题已切换",color:"success"})
+    }
   }
 }
 </script>
+<style scoped lang="sass">
+
+</style>

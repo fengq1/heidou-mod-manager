@@ -1,7 +1,7 @@
 /**
  * plugins/index.js
  *
- * Automatically included in `./src/main.js`
+ * Automatically included in `./src/snackbar.js`
  */
 
 // Plugins

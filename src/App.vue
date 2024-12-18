@@ -17,11 +17,11 @@
     <v-main class="d-flex" style="min-height: 100vh;">
 
       <v-card class="no-select">
-        <v-layout>
+        <v-layout height="88vh">
           <v-navigation-drawer
             location="right"
             v-model="drawer"
-            :rail="rail"
+            :rail="rail" class="font-weight-medium"
             permanent
           >
             <v-list-item
@@ -63,6 +63,13 @@
                 title="网站导航/工具"
                 value="nav"
                 to="nav">
+              </v-list-item>
+              <v-list-item
+                prepend-icon="mdi-cog-outline"
+                title="设置"
+                value="appConf"
+                to="appConf"
+              >
               </v-list-item>
             </v-list>
           </v-navigation-drawer>
