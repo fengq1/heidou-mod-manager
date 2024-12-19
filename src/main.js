@@ -9,7 +9,7 @@ import {registerPlugins} from '@/plugins'
 
 // Components
 import App from './App.vue'
-import conf from "./utils/conf.js";
+import  conf  from "./utils/conf.js";
 await conf.initAppConf()
 import {t} from './utils/locale.js'
 // Composables

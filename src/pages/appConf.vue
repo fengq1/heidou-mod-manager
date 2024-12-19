@@ -1,8 +1,8 @@
 <script setup>
 import {loadLocale} from "@/utils/locale.js";
 import {toggleTheme} from "@/utils/theme.js";
-import {onBeforeMount, ref} from 'vue'
 import conf from "@/utils/conf.js";
+import {ref} from 'vue'
 import {useMessage} from "vuetify-message-vue3";
 
 const message = useMessage()
@@ -47,7 +47,7 @@ const _changeLocale = async () => {
                 <v-row dense>
                   <v-col cols="12">
                     <v-select max-width="300"
-                              v-model="appConf.locale"
+                              v-model="conf.appConf.locale"
                               :items="['zh_CN','en']"
                               @update:modelValue="_changeLocale"
                               variant="solo"
@@ -55,7 +55,7 @@ const _changeLocale = async () => {
                     </v-select>
                   </v-col>
                   <v-col cols="12">
-                    <v-radio-group inline label="系统主题" v-model="appConf.theme"
+                    <v-radio-group inline label="系统主题" v-model="conf.appConf.theme"
                                    @change="changeTheme">
                       <v-radio label="明亮" value="light"></v-radio>
                       <v-radio label="暗黑" value="dark"></v-radio>

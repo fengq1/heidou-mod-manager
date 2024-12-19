@@ -25,7 +25,7 @@ function getOsTheme() {
 
 export async function initTheme() {
   await conf.initAppConf()
-  const appConfigs = await conf.get()
+  const appConfigs = await conf.appConf
   console.log('appConfigs', appConfigs)
   const appConfigTheme = appConfigs.theme
   console.log('appConfigTheme', appConfigTheme)
@@ -35,7 +35,7 @@ export async function initTheme() {
 }
 
 export async function toggleTheme() {
-  const appConfigs = await conf.get();
+  const appConfigs = await conf.appConf;
   const appConfigTheme = appConfigs.theme
   theme.global.name.value = (appConfigTheme === systemTheme)
     ? getOsTheme()

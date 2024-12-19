@@ -7,9 +7,10 @@ const localeConfPath = `resources/locales/#{locale}.json`
 let localeJson
 
 export const loadLocale = async () => {
-  console.log("载入本地化" + localeJson)
-  let path = localeConfPath.replace('#{locale}', conf.get().locale)
+  console.log("载入本地化", conf.appConf.locale)
+  let path = localeConfPath.replace('#{locale}', conf.appConf.locale)
   localeJson = JSON.parse(await readTextFile(await resolveResource(path)));
+  console.log("载入本地化", localeJson)
 }
 export const t = (key) => {
   console.log("本地化" + localeJson)
