@@ -12,6 +12,7 @@ export function useSetVuetifyTheme(vuetifyTheme) {
 const osTheme = reactive({
   dark: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
 });
+// watch os theme
 // 系统主题变化时更新主题
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
   osTheme.dark = e.matches;
@@ -22,8 +23,9 @@ function getOsTheme() {
   return (osTheme.dark ? 'dark' : 'light')
 }
 
-export async function getTheme() {
-  const appConfigs = await conf.getAppConf();
+export async function initTheme() {
+  await conf.initAppConf()
+  const appConfigs = await conf.get()
   console.log('appConfigs', appConfigs)
   const appConfigTheme = appConfigs.theme
   console.log('appConfigTheme', appConfigTheme)
@@ -32,11 +34,11 @@ export async function getTheme() {
     : appConfigTheme;
 }
 
-export async function toggleTheme(themeValue) {
-  const appConfigs = await conf.getAppConf();
+export async function toggleTheme() {
+  const appConfigs = await conf.get();
   const appConfigTheme = appConfigs.theme
   theme.global.name.value = (appConfigTheme === systemTheme)
     ? getOsTheme()
-    : themeValue;
+    : appConfigTheme;
 }
 

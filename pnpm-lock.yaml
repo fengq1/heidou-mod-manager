@@ -23,6 +23,9 @@ dependencies:
   vuetify:
     specifier: ^3.6.14
     version: 3.7.5(vite-plugin-vuetify@2.0.4)(vue@3.5.13)
+  vuetify-message-vue3:
+    specifier: ^1.1.2
+    version: 1.1.2(vue@3.5.13)(vuetify@3.7.5)
 
 devDependencies:
   '@eslint/js':
@@ -3276,6 +3279,16 @@ packages:
       '@vue/runtime-dom': 3.5.13
       '@vue/server-renderer': 3.5.13(vue@3.5.13)
       '@vue/shared': 3.5.13
+
+  /vuetify-message-vue3@1.1.2(vue@3.5.13)(vuetify@3.7.5):
+    resolution: {integrity: sha512-XN72+7XiLjELXFb8iTmNiBSl0MP/2gXTFiwWt1sRmSbPfP0eusTiAtusPKTX4SXbFygCgYFIBZxRqXK7koL4tg==}
+    peerDependencies:
+      vue: '>3.0.0'
+      vuetify: '>3.0.0'
+    dependencies:
+      vue: 3.5.13
+      vuetify: 3.7.5(vite-plugin-vuetify@2.0.4)(vue@3.5.13)
+    dev: false
 
   /vuetify@3.7.5(vite-plugin-vuetify@2.0.4)(vue@3.5.13):
     resolution: {integrity: sha512-5aiSz8WJyGzYe3yfgDbzxsFATwHvKtdvFAaUJEDTx7xRv55s3YiOho/MFhs5iTbmh2VT4ToRgP0imBUP660UOw==}

@@ -2,6 +2,10 @@
   "width": 800,
   "height": 600,
   "theme": "light",
-  "language": "zh_CN",
+  "locale": "zh_CN",
+  "locales": {
+    "zh_CN": "简体中文",
+    "en": "English"
+  },
   "game": "stardew_valley"
 }

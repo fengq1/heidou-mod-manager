@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "Heidou"
+  },
+  "games": {
+    "stardew_valley": {
+      "menus": {
+        "mod_manager": "Mod Manager",
+        "game_save": "Game Save",
+        "online_helper": "Online Helper",
+        "nav": "WebSite&Toolbox"
+      }
+    }
+  }
+}
