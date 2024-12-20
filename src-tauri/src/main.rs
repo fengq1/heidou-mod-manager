@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    heidou_mod_manager_lib::run()
+    heidoudou_lib::run()
 }
