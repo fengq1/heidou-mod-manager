@@ -1,0 +1,29 @@
+{
+  "avatar": "https://staticdelivery.nexusmods.com/images/games/4_3/tile_1303.jpg",
+  "menus": [
+    {
+      "key": "ModManager",
+      "value": "ModManager",
+      "icon": "mdi-view-module"
+    },
+    {
+      "key": "GameSave",
+      "value": "GameSave",
+      "icon": "mdi-content-save-all-outline"
+    },
+    {
+      "key": "OnlineHelper",
+      "value": "OnlineHelper",
+      "icon": "mdi-account-group-outline"
+    },
+    {
+      "key": "Toolbox",
+      "value": "Toolbox",
+      "icon": "mdi-toolbox-outline"
+    }
+  ],
+  "smapi": {
+    "version": "",
+    "path": ""
+  }
+}

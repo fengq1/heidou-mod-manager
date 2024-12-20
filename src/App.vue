@@ -1,24 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import {MessageProvider} from "vuetify-message-vue3";
 import logo from './assets/logo.png'
 import {Window} from '@tauri-apps/api/window';
-import More from "@/pages/more.vue";
-// import {onBeforeMount, ref} from "vue";
-// import {loadLocale} from "@/utils/locale.js";
+import More from "@/pages/More";
+import {getGameConf} from "@/utils/conf";
+import {ref} from "vue";
 
 const appWindow = new Window('main');
 
-let drawer = true
-let rail = false
-let menus = []
-// const appConf = ref({})
-//
-// onBeforeMount(async () => {
-//   console.log('onBeforeMount1111{}'+ appConf.value.locale)
-//   appConf.value = await this.$conf.getAppConf();
-//   console.log('onBeforeMount22222{}'+ appConf.value.locale)
-//   await loadLocale()
-// })
+const drawer = ref(true)
+const rail = ref(false)
+
+let menus = getGameConf().menus
+console.log('菜单', menus)
 
 const close = () => {
   appWindow.close();
@@ -44,7 +38,7 @@ const startDragging = () => {
         <v-avatar size="x-large" :image="logo">
         </v-avatar>
 
-        <v-app-bar-title>Heidou</v-app-bar-title>
+        <v-app-bar-title>{{$al('Title')}}</v-app-bar-title>
         <More/>
         <v-btn icon="mdi-minus" size="large" @click="minimize"></v-btn>
         <!--      <v-btn icon="mdi-fullscreen" size="large" @click=" toggleMaximize"></v-btn>-->
@@ -76,35 +70,17 @@ const startDragging = () => {
               </v-list-item>
               <v-divider/>
               <v-list density="compact" nav>
-                <v-list-item
-                  prepend-icon="mdi-view-module"
-                  :title="$t('mod')"
-                  value="mod"
-                  to="mod">
-                </v-list-item>
-                <v-list-item
-                  prepend-icon="mdi-content-save-all-outline"
-                  title="游戏存档"
-                  value="save"
-                  to="save">
-                </v-list-item>
-                <v-list-item
-                  prepend-icon="mdi-account-group-outline"
-                  title="联机助手"
-                  value="online_helper"
-                  to="online_helper"
-                ></v-list-item>
-                <v-list-item
-                  prepend-icon="mdi-toolbox-outline"
-                  title="网站导航/工具"
-                  value="nav"
-                  to="nav">
+                <v-list-item v-for="menu in menus"
+                             :prepend-icon="menu.icon"
+                             :title="$gl(menu.key)"
+                             :value="menu.value"
+                             :to="menu.key">
                 </v-list-item>
                 <v-list-item
                   prepend-icon="mdi-cog-outline"
-                  title="设置"
-                  value="appConf"
-                  to="appConf"
+                  :title="$al('Conf')"
+                  value="Conf"
+                  to="Conf"
                 >
                 </v-list-item>
               </v-list>

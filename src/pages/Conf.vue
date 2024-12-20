@@ -1,31 +1,35 @@
 <script setup>
-import {loadLocale} from "@/utils/locale.js";
-import {toggleTheme} from "@/utils/theme.js";
-import conf from "@/utils/conf.js";
+import {loadLocale} from "@/utils/locale";
+import {toggleTheme, setTheme} from "@/utils/theme";
+import {conf, saveAppConf} from "@/utils/conf";
 import {ref} from 'vue'
 import {useMessage} from "vuetify-message-vue3";
+import {useTheme} from 'vuetify'
+
+setTheme(useTheme())
 
 const message = useMessage()
 
 const tab = ref('app')
 
 const changeTheme = async () => {
-  let result = await conf.saveAppConf();
+  let result = await saveAppConf();
   if (result.error) {
     message.error("保存失败", {variant: "tonal"});
     return
   }
-  await toggleTheme()
+  toggleTheme()
 }
 
 const _changeLocale = async () => {
-  let result = await conf.saveAppConf();
+  let result = await saveAppConf();
   if (result.error) {
     message.error("保存失败", {variant: "tonal"});
     return
   }
   await loadLocale()
 }
+
 </script>
 <template>
   <v-container fluid>
@@ -36,8 +40,8 @@ const _changeLocale = async () => {
             v-model="tab"
             align-tabs="start"
           >
-            <v-tab value="app">应用设置</v-tab>
-            <v-tab value="stardewValley">星露谷物语设置</v-tab>
+            <v-tab value="app" :text="$al('AppConf')"></v-tab>
+            <v-tab value="stardewValley" :text="$gl('Name')"></v-tab>
           </v-tabs>
           <v-tabs-window v-model="tab">
             <v-tabs-window-item
@@ -47,19 +51,20 @@ const _changeLocale = async () => {
                 <v-row dense>
                   <v-col cols="12">
                     <v-select max-width="300"
-                              v-model="conf.appConf.locale"
-                              :items="['zh_CN','en']"
+                              :label="$al('Language')"
+                              v-model="conf.app.locale"
+                              :items="conf.app.locales"
                               @update:modelValue="_changeLocale"
                               variant="solo"
                     >
                     </v-select>
                   </v-col>
                   <v-col cols="12">
-                    <v-radio-group inline label="系统主题" v-model="conf.appConf.theme"
+                    <v-radio-group inline :label="$al('Theme')" v-model="conf.app.theme"
                                    @change="changeTheme">
-                      <v-radio label="明亮" value="light"></v-radio>
-                      <v-radio label="暗黑" value="dark"></v-radio>
-                      <v-radio label="跟随系统" value="system"></v-radio>
+                      <v-radio :label="$al('Light')" value="light"></v-radio>
+                      <v-radio :label="$al('Dark')" value="dark"></v-radio>
+                      <v-radio :label="$al('System')" value="system"></v-radio>
                     </v-radio-group>
                   </v-col>
                 </v-row>

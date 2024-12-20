@@ -1,0 +1,21 @@
+{
+  "app": {
+    "Title": "Heidou",
+    "Conf": "Setting",
+    "AppConf": "Application Setting",
+    "Language": "Language",
+    "Theme": "Theme",
+    "Light": "Light",
+    "Dark": "Dark",
+    "System": "System"
+  },
+  "games": {
+    "Stardew Valley": {
+      "Name": "Stardew Valley",
+      "ModManager": "Mod Manager",
+      "GameSave": "Game Save",
+      "OnlineHelper": "Online Helper",
+      "Toolbox": "WebSite&Toolbox"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "app": {
+    "Title": "黑豆豆",
+    "Conf": "设置",
+    "AppConf": "应用设置",
+    "Language": "语言",
+    "Theme": "主题",
+    "Light": "浅色",
+    "Dark": "深色",
+    "System": "跟随系统"
+  },
+  "games": {
+    "Stardew Valley": {
+      "Name": "星露谷物语",
+      "ModManager": "Mod管理",
+      "GameSave": "游戏存档",
+      "OnlineHelper": "联机助手",
+      "Toolbox": "网站导航/工具"
+    }
+  }
+}

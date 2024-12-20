@@ -1,3 +1,15 @@
+<script lang="ts">
+export default {
+  data: () => ({
+    fav: true,
+    menu: false,
+    message: false,
+    hints: true,
+    appConfDrawer: false
+  })
+}
+</script>
+
 <template>
   <v-menu
     v-model="menu"
@@ -32,21 +44,3 @@
 <style scoped lang="sass">
 
 </style>
-<script setup>
-import {useTheme} from "vuetify";
-import {useSetVuetifyTheme} from "@/utils/theme.js";
-
-useSetVuetifyTheme(useTheme())
-</script>
-
-<script>
-export default {
-  data: () => ({
-    fav: true,
-    menu: false,
-    message: false,
-    hints: true,
-    appConfDrawer: false
-  })
-}
-</script>
