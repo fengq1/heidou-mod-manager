@@ -10,13 +10,13 @@ import 'vuetify/styles'
 
 // Composables
 import {createVuetify} from 'vuetify'
-import {initTheme} from '@/utils/theme';
-import {initAppConf} from "@/utils/conf";
+import {getTheme} from '@/utils/theme';
+import {loadAppConf} from "@/utils/conf";
 
-await initAppConf()
+await loadAppConf()
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: initTheme()
+    defaultTheme: getTheme()
   },
 })

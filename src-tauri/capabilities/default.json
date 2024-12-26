@@ -15,9 +15,36 @@
     "core:window:allow-destroy",
     "core:window:allow-hide",
     "core:window:allow-show",
+    "fs:default",
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
+    "fs:allow-resource-write-recursive",
     "fs:allow-resource-read-recursive",
-    "fs:default"
+    "fs:allow-exe-write-recursive",
+    "fs:allow-exe-read-recursive",
+    "fs:allow-home-write-recursive",
+    "fs:allow-home-read-recursive",
+    "dialog:default",
+    "shell:default",
+    "os:default",
+    "shell:allow-kill",
+    "shell:allow-open",
+    "shell:allow-stdin-write",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "exec-sh",
+          "cmd": "sh",
+          "args": [
+            "-c",
+            {
+              "validator": "\\S+"
+            }
+          ],
+          "sidecar": false
+        }
+      ]
+    }
   ]
 }

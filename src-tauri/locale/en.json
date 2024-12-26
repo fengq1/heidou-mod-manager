@@ -1,8 +1,8 @@
 {
   "app": {
     "Title": "Heidou",
-    "Conf": "Setting",
-    "AppConf": "Application Setting",
+    "App": "App",
+    "Setting": "Application Setting",
     "Language": "Language",
     "Theme": "Theme",
     "Light": "Light",
@@ -10,12 +10,14 @@
     "System": "System"
   },
   "games": {
-    "Stardew Valley": {
+    "stardew_valley": {
+      "Setting": "Stardew Valley Setting",
       "Name": "Stardew Valley",
-      "ModManager": "Mod Manager",
-      "GameSave": "Game Save",
-      "OnlineHelper": "Online Helper",
-      "Toolbox": "WebSite&Toolbox"
+      "mod": "Mod Manager",
+      "save": "Game Save",
+      "online": "Online Helper",
+      "toolbox": "WebSite&Toolbox",
+      "Game root directory": "Game Root Directory"
     }
   }
 }

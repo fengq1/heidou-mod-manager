@@ -11,6 +11,7 @@ const local: Ref<{ [key: string]: any }> = ref({
 })
 
 export const loadLocale = async (): Promise<void> => {
+  console.log("加载Locale文件",conf.value.app.locale)
   let _path = path.replace('#{locale}', conf.value.app.locale)
   local.value = JSON.parse(await readTextFile(await resolveResource(_path)));
 }

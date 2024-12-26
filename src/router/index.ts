@@ -32,4 +32,5 @@ router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')
 })
 
+console.log('routs',routes)
 export default router

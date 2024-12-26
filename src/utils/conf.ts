@@ -1,6 +1,7 @@
 import {resolveResource} from '@tauri-apps/api/path';
-import {readTextFile, writeTextFile} from '@tauri-apps/plugin-fs';
+import {readTextFile, writeTextFile, readDir} from '@tauri-apps/plugin-fs';
 import {loadLocale} from "@/utils/locale";
+
 import {type Ref, ref} from "vue";
 
 const path = {
@@ -15,38 +16,30 @@ export const conf: Ref<{ [key: string]: any }> = ref({
   app: {
     game: ''
   },
+  game: {}
 })
 
-export const initAppConf = async (): Promise<void> => {
+export const loadAppConf = async (): Promise<void> => {
   conf.value.app = JSON.parse(await readTextFile(resource.app));
-  console.log("加载配置", conf.value.app)
   let game = conf.value.app.game;
-  let _gameConfPath = path.game.replace("#{game}", game)
-  console.log("加载游戏配置", _gameConfPath)
-  conf.value[game] = JSON.parse(await readTextFile(await resolveResource(_gameConfPath)));
+  let gameConfPath = path.game.replace("#{game}", game)
+  console.log("加载游戏配置", game, gameConfPath)
+  conf.value.game = JSON.parse(await readTextFile(await resolveResource(gameConfPath)));
   await loadLocale()
 }
 
-interface Result {
-  error: boolean,
-  msg: string
-}
-
-export const saveAppConf = async (): Promise<Result> => {
+export const saveAppConf = (): Promise<void> => {
   console.log("保存配置", conf.value.app)
-  let result: Result = {error: false, msg: ''}
-  await writeTextFile(resource.app, JSON.stringify(conf.value.app))
-    .then(() => {
-      // conf.app = newAppConf;
-    })
-    .catch(e => {
-      result.error = true;
-      result.msg = e
-    })
-  return result
+  return writeTextFile(resource.app, JSON.stringify(conf.value.app))
 }
-
-export const getGameConf = (): Promise<{}> => {
+export const saveGameConf = async (): Promise<void> => {
+  console.log('保存游戏配置')
   let game = conf.value.app.game;
-  return conf.value[game];
+  let gameConfPath = path.game.replace("#{game}", game)
+  console.log(conf.value.game['path'])
+  return writeTextFile(await resolveResource(gameConfPath), JSON.stringify(conf.value.game));
 }
+// export const getGameConf = (): { [key: string]: any } => {
+//   let game = conf.value.app.game;
+//   return conf.value[game];
+// }

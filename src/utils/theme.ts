@@ -24,7 +24,7 @@ const getOsTheme = (): string => {
   return (osTheme.dark ? 'dark' : 'light')
 }
 
-export const initTheme = (): string => {
+export const getTheme = (): string => {
   const appConfTheme = conf.value.app.theme
   console.log('appConfTheme', appConfTheme)
   return (appConfTheme === systemTheme)

@@ -15,7 +15,17 @@ const host = process.env.TAURI_DEV_HOST;
 export default defineConfig({
     base: "./",
     plugins: [
-        VueRouter(),
+        VueRouter({
+            routesFolder: [
+                {
+                    src: 'src/pages'
+                },
+                {
+                    src: 'src/games/stardew_valley/pages',
+                    path: 'stardew_valley/'
+                },
+            ],
+        }),
         Vue({
             template: {transformAssetUrls}
         }),

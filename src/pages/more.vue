@@ -23,13 +23,19 @@ export default {
     </template>
     <v-card>
       <v-list>
-        <v-list-item>
+        <v-list-item to="/setting">
           <v-btn variant="text">
+            <v-icon icon="mdi-cog-outline"/>
+            &emsp;{{ $al('Setting') }}
+          </v-btn>
+        </v-list-item>
+        <v-list-item>
+          <v-btn variant="text" to="/suggest">
             <v-icon icon="mdi-email-edit-outline"/>
             &emsp;意见反馈
           </v-btn>
         </v-list-item>
-        <v-list-item>
+        <v-list-item to="/">
           <v-btn variant="text" block>
             <v-icon icon="mdi-account-heart" color="red"/>
             &emsp;关于黑豆
