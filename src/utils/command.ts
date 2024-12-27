@@ -4,26 +4,25 @@ import {platform} from '@tauri-apps/plugin-os';
 const currentPlatform = platform();
 
 const commands: any = {
-  'getCurrentSmapiVersion': {
-    // 'windows': 'wmic datafile where name\=\"#gemaPath\\StardewModdingAPI\.exe\" get Version /value'
-    'windows': "echo 'lala'"
-  }
+  'get_current_smapi_version': ['datafile', 'where', 'name="#gemaPath\\\\StardewModdingAPI.exe"', 'get', 'Version', '/value']
 }
 
-export const getCmd = (cmdName: string): string => {
-  return commands[cmdName][currentPlatform]
+interface CmdArgOptions {
+  index: number;
+  param: string;
+  value: string;
 }
-export const exec = async (cmd: string): Promise<any> => {
-  console.log('exec', cmd)
-  if (currentPlatform === 'windows') {
-    const args: string[] = ['-c']
-    args.push(cmd)
-    console.log(args)
-    return await Command.create('exec-sh', ['-c',
-      "echo Hello World!",]).execute()
-  } else if (currentPlatform === 'macos') {
 
-  } else if (currentPlatform === 'android') {
-
+export const exec = async (cmdName: string, options: CmdArgOptions[]): Promise<any> => {
+  let args: string[] = [...commands[cmdName]]
+  let copyArgs: string[] = [...args];
+  cmdName = currentPlatform + "_" + cmdName;
+  if (options.length > 0) {
+    options.forEach((option: CmdArgOptions) => {
+      args[option.index] = copyArgs[option.index].replace(option.param, option.value);
+    })
   }
+  console.log("exec", cmdName, args)
+  return await Command.create(cmdName, args, {"encoding": "gbk"})
+    .execute()
 }

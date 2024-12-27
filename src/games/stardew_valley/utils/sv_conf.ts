@@ -1,6 +1,6 @@
 import {conf, saveGameConf} from "@/utils/conf";
 import {invoke} from "@tauri-apps/api/core";
-import {exec, getCmd} from "@/utils/command";
+import {exec} from "@/utils/command";
 
 export const getSvConf = async () => {
   console.log("获取SvConf")
@@ -17,19 +17,15 @@ export const getSvConf = async () => {
 }
 
 const getSmapiVersion = async () => {
-  const smapiVersion = conf.value.game.smapi.version;
-  console.log('smapiVersion', conf.value.game)
-  if (!smapiVersion) {
-    const command: string = getCmd('getCurrentSmapiVersion')
-      .replace("#gemaPath", conf.value.game['path'].replace(/\//g, "\\"))
-    console.log('command', command)
-    await exec(command)
-      .then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.error(err)
-      })
-  }
+  const cmdName = 'get_current_smapi_version';
+  await exec(cmdName, [{index: 2, param: "#gemaPath", value: conf.value.game['path'].replace(/\//g, "\\\\")}])
+    .then(res => {
+      console.log(res)
+      conf.value.game.smapi.version = res.stdout.replace(/\r?\n/g, "")
+      saveGameConf()
+    }).catch(err => {
+      console.error(err)
+    })
 }
 // const loadCurrentSmapiVersion = () => {
 //   console.log(loadCurrentSmapiVersion)

@@ -6,7 +6,7 @@ import {getSvConf} from "@/games/stardew_valley/utils/sv_conf";
 
 const svConf = ref({
   "smapi": {
-    "version": "unknown"
+    "version": ""
   }
 })
 
@@ -15,7 +15,7 @@ onBeforeMount(async () => {
   svConf.value = await getSvConf()
 })
 
-onMounted(() => {
+onMounted(async () => {
   console.log("mod onBeforeMount")
   console.log("svConf", svConf.value)
 })
@@ -24,7 +24,7 @@ console.log("mod setup", svConf.value)
 
 <template>
   <v-row>
-    <v-col cols="3">
+    <v-col cols="5">
       <v-card
         title="SMAPI"
         :subtitle="svConf.smapi.version"
@@ -35,10 +35,9 @@ console.log("mod setup", svConf.value)
         </template>
       </v-card>
     </v-col>
-    <!--    <v-col cols="5">-->
-    <!--      &lt;!&ndash;          <v-btn color="green">启动游戏</v-btn>&ndash;&gt;-->
-    <!--      <v-btn size="x-large" color="green">启动游戏</v-btn>-->
-    <!--    </v-col>-->
+    <v-col cols="3">
+      <v-btn  color="success" size="x-large"  block>启动游戏</v-btn>
+    </v-col>
   </v-row>
 </template>
 

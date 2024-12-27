@@ -34,13 +34,17 @@
       "identifier": "shell:allow-execute",
       "allow": [
         {
-          "name": "exec-sh",
-          "cmd": "sh",
+          "name": "windows_get_current_smapi_version",
+          "cmd": "wmic",
           "args": [
-            "-c",
+            "datafile",
+            "where",
             {
-              "validator": "\\S+"
-            }
+              "validator": "*"
+            },
+            "get",
+            "Version",
+            "/value"
           ],
           "sidecar": false
         }
